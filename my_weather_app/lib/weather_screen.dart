@@ -3,24 +3,23 @@
 import 'package:flutter/material.dart';
 
 class WeatherScreen extends StatelessWidget {
-    WeatherScreen({super.key});
+  final double temperature;
+  final String iconCode;
+  final String condition;
 
-   final Map<String,dynamic> screenData = {
-       "temperature":"300",
-       "icon": Icons.cloud,
-       "condition": "Sunny"
-     }
-   ;
+   const WeatherScreen({super.key, required this.temperature, required this.iconCode, required this.condition});
+
+
   @override
   Widget build(BuildContext context) {
-    final data = screenData;
+
     return Container(
         padding: const EdgeInsets.all(10.0),
       width: double.infinity,
       color: Color.fromARGB(120, 40, 40, 40),
         child: Column(
       children: [
-        Text("${data["temperature"]} K",
+        Text("$temperature K",
         style:  TextStyle(
           fontWeight: FontWeight.w700,
           fontSize: 30
@@ -29,12 +28,19 @@ class WeatherScreen extends StatelessWidget {
 
         SizedBox(height: 10),
 
-        Icon(data["icon"], size: 50, color: Colors.white),
+        Image.network(
+          "https://openweathermap.org/img/wn/$iconCode@2x.png", // Fetch icon dynamically
+          width: 100,
+          height: 100,
+          errorBuilder: (context, error, stackTrace) {
+            return const Icon(Icons.error, size: 50, color: Colors.red);
+          },
+        ),
 
         const SizedBox(height: 10),
 
 
-         Text(data["condition"],
+         Text(condition,
           style: TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: 20

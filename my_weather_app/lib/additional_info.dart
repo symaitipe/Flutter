@@ -3,23 +3,28 @@
 import 'package:flutter/material.dart';
 
 class AdditionalInfo extends StatelessWidget{
-   AdditionalInfo({super.key});
+   AdditionalInfo({super.key, required this.humidityMeasure, required this.windSpeedMeasure, required this.pressureMeasure});
 
-  final List<Map<String, dynamic>> additionalData = [
+   final int humidityMeasure;
+   final double windSpeedMeasure;
+   final int pressureMeasure;
+
+
+   late final List<Map<String, dynamic>> additionalData = [
     {
-      "icon": Icons.cloud,
-      "placeholder": "Humidity",
-      "measure": "90"
+      "icon": Icons.water_drop,
+      "placeholder" : "Humidity",
+      "measure": humidityMeasure
     },
     {
-      "icon": Icons.wb_sunny,
+      "icon": Icons.air,
       "placeholder": "Wind Speed",
-      "measure": "7.87"
+      "measure": windSpeedMeasure
     },
     {
-      "icon": Icons.grain,
+      "icon": Icons.speed,
       "placeholder": "Pressure",
-      "measure": "1000"
+      "measure": pressureMeasure
     },
 
   ];
@@ -53,7 +58,7 @@ class AdditionalInfo extends StatelessWidget{
                   ),
                   const SizedBox(height: 10),
                    Text(
-                    data["measure"],
+                    data["measure"].toString(),
                     style: TextStyle(
                       fontSize: 14,
 
